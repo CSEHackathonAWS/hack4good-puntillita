@@ -28,7 +28,9 @@ Para acceder desde el cloud a esta arquitectura comendamos con un servicio no-ip
 Para el consumo de este servicio, una aplicación nativa java. Realiza una lectura de tags-NFC con el número del código de barras. Este lanzará una consulta a la API y se retorna un JSON con todos los metadatos relacionados con el producto seleccionado. Ahora esta implementado : nombre, precio, pasillo. La aplicación ahora "canta" el nombre y el precio, con el Text-To-Speech nativo de Android.
 
 [Código API](https://github.com/CSEHackathonAWS/puntillita-api)
+
 [Código APP](https://github.com/CSEHackathonAWS/puntillita-app)
+
 [Código Utiles](https://github.com/CSEHackathonAWS/puntillita-tools)
 
 ## Demo Vídeo
