@@ -16,7 +16,7 @@ El potencial, sabiendo que estoy leyendo:
 
 ## Diagrama de Arquitectura
 
-![Arquitectura](/arq.jpg arquitectura)
+![Arquitectura](arq.jpg arquitectura)
 
 ## Descripción Técnica
 
