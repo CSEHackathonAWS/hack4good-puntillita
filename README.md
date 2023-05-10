@@ -15,8 +15,7 @@ El potencial, sabiendo que estoy leyendo:
  - Podemos crear una lista de productos elegidos.
 
 ## Diagrama de Arquitectura
-
-![Arquitectura](arq.jpg arquitectura)
+![Arquitectura]([arq.jpg](https://github.com/CSEHackathonAWS/hack4good-puntillita/blob/main/arq.jpg) arquitectura)
 
 ## Descripción Técnica
 
