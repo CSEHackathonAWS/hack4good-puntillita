@@ -1,48 +1,44 @@
 # Hackathon For Good: La Región de AWS en España al Servicio de la Sociedad
 
-Los participantes del Hackathon tendrán que hacer un fork de este repositorio y crear un repositorio público en GitHub con su propio nombre de usuario (un repositorio único por cada equipo).
-
-A continuación, os mostraremos en este README.md las diferentes secciones que deberán completarse, resaltando los puntos indicados para la solución/implementación. Por favor, sentiros libres de crear más subsecciones si fuese necesario. La idea es comprender qué componentes habéis utilizado y cuál es la esencia de vuestra propuesta.
+Proyecto : Puntillita
+Reto : ONCE
 
 ## Descripción del Proyecto
 
-Una breve descripción de:
-¿Qué problema estamos tratando de resolver? Deberéis indicar qué reto habéis elegido: ONCE, Cruz Roja , Acciona y qué problemática estáis tratando de resolver.
-¿Cuál es la solución propuesta? En un máximo de 200 palabras, indicarnos los aspectos más importantes de vuestra solución y qué la hace única.  
-Descripción de la Solución
+Para la gestión más autónomas de la gente invidentes o parcialmente invidentes proponemos una aplicación para ayudar a los potenciales clientes de supermercados. Nos apoyamos a que todos los productos estan indicados con precios al principio de cada repisa con una etiqueta física, dicha etiqueta podría acompañarse de un tag-nfc. El contenido de dicho tag debería es el código de barras. 
 
-En esta sección podéis realizar una descripción más detallada de vuestra aplicación/solución, indicando el caso de uso, los pros y contras de vuestra implementación, etc.
+Una vez identificado todos los productos, la información que puede aportarse es nombre, descripción, precio, localización de todos los productos, etc. 
+
+El potencial, sabiendo que estoy leyendo: 
+ - Identificar el producto elegido.
+ - Puedo buscar otros productos e indicarte donde ir, desde donde estoy (ultima lectura).
+ - Podemos crear una lista de productos elegidos.
 
 ## Diagrama de Arquitectura
 
-Adjuntar una imagen del diagrama de arquitectura de la solución.
+![Arquitectura](/arq.jpg arquitectura)
 
 ## Descripción Técnica
 
-Una visión general de:
+La BBDD para este POC he utilizado una SQLite que me abstrae de tener un motor y siendo un fichero local, la latencia se minimiza. Esta alojada en un S3 y se descarga cada vez que arranca el aplicativo. Futurible es un cambio a cualquier otro sistema, el que mejor se adapte a la volumetría de productos y supermercados. El poblado de la BBDD ha sido realizada haciendo un scrapper parcial sobre la API de Mercadona.
 
-**¿Qué tipo de arquitectura habéis planteado?** Por lo general, las arquitecturas modernas de aplicaciones suelen utilizar microservicios y APIs para conectar los servicios, eso no quiere decir que nos podemos encontrar con arquitecturas de N-capas, arquitecturas monolíticas, de microservicios o basadas en eventos. Dependerá de vuestro caso de uso, pero nos gustaría conocer cuál ha sido vuestra elección.
+Un microservicio REST esta alojado en una instancia EC2 ARM - graviton. Utiliza spring-boot-3 con java 17, en un intento de optimizar el producto se ha intentado generar el modo nativo (GraalVM). No ha sido posible por la cantidad de recursos consumida en la compilación (debe ser dentro de la misma arquitectura) y la falta de tiempo para validar problemas de compilación. 
 
-**¿Qué tecnologías AWS se han utilizado?**
+Para acceder desde el cloud a esta arquitectura comendamos con un servicio no-ip, por simplificar. Más tarde, agregamos un api-gateway, una VPC, load-balancer y group-instances para poder utilizar una DNS que sea agnóstica a la ip externa que varía cada vez que se arranca la instancia.
+
+Para el consumo de este servicio, una aplicación nativa java. Realiza una lectura de tags-NFC con el número del código de barras. Este lanzará una consulta a la API y se retorna un JSON con todos los metadatos relacionados con el producto seleccionado. Ahora esta implementado : nombre, precio, pasillo. La aplicación ahora "canta" el nombre y el precio, con el Text-To-Speech nativo de Android.
+
+[Código API](https://github.com/CSEHackathonAWS/puntillita-api)
+[Código APP](https://github.com/CSEHackathonAWS/puntillita-app)
+[Código Utiles](https://github.com/CSEHackathonAWS/puntillita-tools)
 
 ## Demo Vídeo
 
-En esta sección podréis subir o enlazar vuestra vídeo presentación. Tenéis dos opciones, **1/** incluir un enlace de YouTube donde tengáis la presentación, **2/** subir un fichero directamente a vuestro repositorio. A continuación, os mostramos los pasos para subir el vídeo:
-
-1.      Una vez creado el repositorio en vuestro fichero README.md, hacéis Click en el icono lápiz.
-
-![Screenshot 2023-05-08 at 11 53 05](https://user-images.githubusercontent.com/28776392/236794134-37b49eaf-b091-4e9c-a0d1-759f89679efc.png)
-
-
-2.      Y en la parte inferior de la ventana podréis hacer Click y subir ficheros con un tamaño máximo de 10MB.
-
-![Screenshot 2023-05-08 at 11 53 14](https://user-images.githubusercontent.com/28776392/236794175-b6231532-6c78-428c-a5be-2781430053b9.png)
-
-3.      Una vez se ha subido el vídeo os aparecerá en el fichero README.md. Si excedéis el tamaño permitido (10MB) podéis referencia un enlace de Youtube para que el jurado pueda valorar vuestra presentación.
-
+[![Video Demo](https://img.youtube.com/vi/XXX/0.jpg)](https://www.youtube.com/watch?v=XX)
 
 
 ## Team Members
+- Víctor J. Bellés [email](mailto:victor-juan.belles@soprasteria.com)
 
-Lista de los miembros del equipo e ID de correo electrónico.
- 
+Agradecimientos a:
+- Ricard Rubio [email](mailto:ricard.rubio@soprasteria.com) (Mentoring)
