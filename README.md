@@ -16,7 +16,7 @@ El potencial, sabiendo que estoy leyendo:
 
 ## Diagrama de Arquitectura
 [![Arquitectura](https://github.com/CSEHackathonAWS/hack4good-puntillita/blob/main/arq.jpg)](https://github.com/CSEHackathonAWS/hack4good-puntillita/blob/main/arq.jpg)
-![Arquitectura](arq.jpg)
+
 ## Descripción Técnica
 
 La BBDD para este POC he utilizado una SQLite que me abstrae de tener un motor y siendo un fichero local, la latencia se minimiza. Esta alojada en un S3 y se descarga cada vez que arranca el aplicativo. Futurible es un cambio a cualquier otro sistema, el que mejor se adapte a la volumetría de productos y supermercados. El poblado de la BBDD ha sido realizada haciendo un scrapper parcial sobre la API de Mercadona.
